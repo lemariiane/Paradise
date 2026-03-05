@@ -7,64 +7,81 @@
     android:layout_height="match_parent"
     tools:context=".CadastroActivity"
     android:orientation="vertical"
-    android:gravity="center">
+    android:background="@color/white_dark">
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cadastre seu neném"
+        android:id="@+id/tv_titulo_cadastro"
         android:textAlignment="center"
         android:textColor="@color/azul"
-        android:textSize="36sp"
+        android:textSize="32sp"
+        android:layout_marginBottom="20dp"
         android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
         app:cardCornerRadius="30dp"
-        app:cardElevation="20dp">
+        app:cardElevation="20dp"
+        android:layout_marginBottom="-20dp">
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:padding="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
             android:background="@drawable/custom_editext">
 
+        <EditText
+            android:id="@+id/nome_bebe"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white_dark"
+            android:drawableLeft="@drawable/outline_bedroom_baby_24"
+            android:drawablePadding="8dp"
+            android:hint="Nome"
+            android:padding="8dp"
+            android:textColor="@color/black" />
+
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/nome_bebe"
-                android:background="@drawable/custom_editext"
-                android:layout_marginTop="40dp"
-                android:padding="8dp"
-                android:hint="Nome"
-                android:drawableLeft="@drawable/outline_bedroom_baby_24"
-                android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:id="@+id/data_nasc"
-                android:background="@drawable/custom_editext"
-                android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Data de Nascimento"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/white_dark"
                 android:drawableLeft="@drawable/outline_calendar_month_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black"
-                android:inputType="date" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Cadastrar"
-                android:id="@+id/cadastro_button"
-                android:textSize="18sp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/gelo"
-                app:cornerRadius = "20dp"/>
-        </LinearLayout>
+                android:hint="Data de Nascimento"
+                android:focusable="false"
+                android:clickable="true"
+                android:padding="8dp"
+                android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/spinner_genero"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/white_dark"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/cadastro_bebe_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/beje_escuro"
+            android:text="Finalizar Cadastro"
+            android:textSize="18sp"
+            app:cornerRadius="20dp" />
+    </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
 </LinearLayout>

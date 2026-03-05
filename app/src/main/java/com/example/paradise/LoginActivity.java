@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 //Firebase Auth
+import com.example.paradise.bebe.CadastroBebeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void verificarCadastroBebe(String userId) {
         db.collection("bebes")
-                .whereEqualTo("paiId", userId) //vinculação direta para o SQL
+                .whereEqualTo("paiId", userId) //para o SQL
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

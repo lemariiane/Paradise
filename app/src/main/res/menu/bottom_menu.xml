@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/inicio"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/atividades"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="Atividades" />
+
+    <item
+        android:id="@+id/insights"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="Insights" />
+
+    <item
+        android:id="@+id/nao_sei"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Não sei" />
+
+    <item
+        android:id="@+id/perfil_e_bebe"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="Perfis" />
+</menu>
