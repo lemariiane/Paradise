@@ -2,54 +2,103 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#bdb8ad"
-    tools:context=".MainActivity"
+    android:background="@android:color/transparent"
     android:id="@+id/frame_inicio">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp">
+        android:background="@android:color/transparent">
+
+        <TextView
+            android:id="@+id/txt_janela_sono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Próxima soneca --"
+            android:textColor="#bdb8ad"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Spinner
+            android:id="@+id/spinner_bebe"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/bg_spinner"
+            android:textColor="#ba745f"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_janela_sono" />
 
         <TextView
             android:id="@+id/txt_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="O bebê está acordado"
-            android:textSize="18sp"
             android:layout_marginBottom="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/fab_sono_grande"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:letterSpacing="0.05"
+            android:text="O bebê está acordado"
+            android:textColor="#ba745f"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_sono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_sono_grande"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/outline_calendar_month_24"
-            app:backgroundTint="@color/azul"
-            app:fabCustomSize="200dp"
-            app:maxImageSize="100dp"
-            app:tint="@color/white_dark"
+
+        <ImageButton
+            android:id="@+id/btn_sono"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/background_redondo_lua"
+            android:padding="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/botao_lua_sono"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.448"
+            app:tint="@color/white_dark" />
+
+        <ImageButton
+            android:id="@+id/btn_acordar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/background_redondo_sol"
+            android:padding="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/botao_sol_sono"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.448"
+            app:tint="@color/white_dark" />
+
 
         <TextView
-            android:id="@+id/txt_instrucao"
+            android:id="@+id/txt_ultima_soneca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Toque para registrar o sono"
-            android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/fab_sono_grande"
+            android:layout_marginTop="32dp"
+            android:text="Última soneca há --"
+            android:textColor="#ba745f"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_sono" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

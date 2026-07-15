@@ -6,9 +6,9 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/atividades"
-        android:icon="@android:drawable/ic_menu_recent_history"
-        android:title="Atividades" />
+        android:id="@+id/sono"
+        android:icon="@android:drawable/btn_star"
+        android:title="Sono" />
 
     <item
         android:id="@+id/insights"
@@ -16,9 +16,9 @@
         android:title="Insights" />
 
     <item
-        android:id="@+id/nao_sei"
-        android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="Não sei" />
+        android:id="@+id/atividades"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="Atividades" />
 
     <item
         android:id="@+id/perfil_e_bebe"

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Início"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_data_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selecionar data"
+        android:backgroundTint="#0F0F4A"/>
+
+    <Button
+        android:id="@+id/btn_hora_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selecionar hora"
+        android:backgroundTint="#0F0F4A"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fim"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_data_fim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selecionar data"
+        android:backgroundTint="#0F0F4A"/>
+
+    <Button
+        android:id="@+id/btn_hora_fim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selecionar hora"
+        android:backgroundTint="#0F0F4A"/>
+
+</LinearLayout>

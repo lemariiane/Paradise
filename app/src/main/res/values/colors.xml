@@ -2,11 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white_dark">#EAEFF4</color>
-    <color name="azul">#44749d</color>
+    <color name="azul">#0D0561</color>
     <color name="gelo">#c6d4e1</color>
     <color name="beje">#ebe7e0</color>
+    <color name="rose">#c99383</color>
     <color name="beje_escuro">#bdb8ad</color>
+    <color name="roxo_claro">#B069DB</color>
+    <color name="roxo">#6E00B3</color>
     <color name="vermelho">#B22222</color>
-
 
 </resources>

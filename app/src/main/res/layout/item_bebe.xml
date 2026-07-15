@@ -18,7 +18,7 @@
         <View
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/outline_breastfeeding_24" />
+            android:background="@drawable/icon_breastfeeding" />
 
         <LinearLayout
             android:layout_width="0dp"

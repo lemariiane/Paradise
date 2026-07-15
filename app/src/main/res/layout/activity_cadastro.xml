@@ -21,7 +21,7 @@
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
             android:padding="24dp"
-            android:background="@drawable/custom_editext">
+            android:background="@drawable/background_editext">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,22 +34,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/cadastro_email"
-                android:background="@drawable/custom_editext"
+                android:background="@drawable/background_editext"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
                 android:hint="Email"
-                android:drawableLeft="@drawable/outline_account_circle_24"
+                android:drawableLeft="@drawable/icon_account_circle"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/cadastro_password"
-                android:background="@drawable/custom_editext"
+                android:background="@drawable/background_editext"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Senha"
-                android:drawableLeft="@drawable/outline_lock_24"
+                android:drawableLeft="@drawable/icon_lock"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"
                 android:inputType="textPassword"/>

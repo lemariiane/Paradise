@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 public class CadastroActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -36,8 +37,8 @@ public class CadastroActivity extends AppCompatActivity {
                 String user = cadastroEmail.getText().toString().trim();
                 String pass = cadastroPassword.getText().toString().trim();
 
-                //validação de campos
-                if (user.isEmpty()){
+                // Validação de campos
+                if (user.isEmpty()) {
                     cadastroEmail.setError("Email não pode está vazio!");
                     return;
                 }
@@ -45,12 +46,12 @@ public class CadastroActivity extends AppCompatActivity {
                     cadastroEmail.setError("Digite um e-mail válido!");
                     return;
                 }
-                if (pass.isEmpty()){
+                if (pass.isEmpty()) {
                     cadastroPassword.setError("Senha não pode está vazia!");
                     return;
                 }
-                if (pass.length() < 6){
-                    cadastroPassword.setError("A senha tem que ter pelo menos 6 caracteres!");
+                if (pass.length() < 6) {
+                    cadastroPassword.setError("A senha tem que ter no mínimo 6 caracteres!");
                     return;
                 }
 
@@ -58,11 +59,16 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(CadastroActivity.this, "Cadastrado realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CadastroActivity.this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(CadastroActivity.this, LoginActivity.class));
                             finish();
                         } else {
-                            Toast.makeText(CadastroActivity.this, "Erro: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                cadastroEmail.setError("Esse e-mail já está sendo usado!");
+                                cadastroEmail.requestFocus();
+                            } else {
+                                Toast.makeText(CadastroActivity.this, "Erro: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 });

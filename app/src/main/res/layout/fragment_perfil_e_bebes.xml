@@ -40,7 +40,7 @@
                     android:layout_marginStart="127dp"
                     android:layout_toEndOf="@+id/txt_email_usuario"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/outline_digital_out_of_home_24"
+                    android:src="@drawable/icon_logout"
                     app:tint="@color/vermelho" />
 
             </RelativeLayout>
@@ -52,6 +52,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
             android:text="Meus Bebês"
+            android:textColor="@color/beje_escuro"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -60,7 +61,7 @@
             android:id="@+id/recycler_bebes"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_weight="1" />
+            android:layout_weight="2" />
 
         <Button
             android:id="@+id/btn_novo_bebe"

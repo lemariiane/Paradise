@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".atividades.AtividadeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- SPINNER -->
+        <Spinner
+            android:id="@+id/spinner_bebe_historico"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_spinner"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- GRID DE ATIVIDADES -->
+        <GridLayout
+            android:id="@+id/grid_atividades"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/spinner_bebe_historico"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- BANHAR -->
+            <LinearLayout
+                android:id="@+id/card_banho"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/background_atividades"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="63dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/icon_shower" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Banhar"
+                    android:textColor="@color/beje_escuro"/>
+            </LinearLayout>
+
+            <!-- MAMAR -->
+            <LinearLayout
+                android:id="@+id/card_mamar"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/background_atividades"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="63dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/icon_breastfeeding" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mamar"
+                    android:textColor="@color/beje_escuro"/>
+            </LinearLayout>
+
+            <!-- BRINCAR -->
+            <LinearLayout
+                android:id="@+id/card_brincar"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/background_atividades"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="63dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/icon_playground"/>
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Brincar"
+                    android:textColor="@color/beje_escuro"/>
+            </LinearLayout>
+
+            <!-- RUÍDO BRANCO -->
+            <LinearLayout
+                android:id="@+id/card_ruido"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/background_atividades"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="63dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/icon_rounded_ear_sound"/>
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ruído branco"
+                    android:textColor="@color/beje_escuro"/>
+            </LinearLayout>
+
+        </GridLayout>
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/grid_atividades"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

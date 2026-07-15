@@ -37,14 +37,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="30dp"
-            android:background="@drawable/custom_editext">
+            android:background="@drawable/background_editext">
 
         <EditText
             android:id="@+id/nome_bebe"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white_dark"
-            android:drawableLeft="@drawable/outline_bedroom_baby_24"
+            android:drawableLeft="@drawable/icon_name_baby"
             android:drawablePadding="8dp"
             android:hint="Nome"
             android:padding="8dp"
@@ -56,7 +56,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/white_dark"
-                android:drawableLeft="@drawable/outline_calendar_month_24"
+                android:drawableLeft="@drawable/icon_calendar"
                 android:drawablePadding="8dp"
                 android:hint="Data de Nascimento"
                 android:focusable="false"

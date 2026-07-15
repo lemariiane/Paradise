@@ -15,13 +15,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.paradise.MainActivity;
 import com.example.paradise.R;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class CadastroBebeActivity extends AppCompatActivity {
@@ -32,7 +36,7 @@ public class CadastroBebeActivity extends AppCompatActivity {
     private Button btnCadastrar;
     private String bebeIdParaEdicao = null;
     private String userId;
-    private FirebaseFirestore db;
+    private BebeRepository repository;
     private String[] opcoesGenero = {"Selecione um gênero", "Feminino", "Masculino", "Outro"};
 
     @Override
@@ -41,21 +45,19 @@ public class CadastroBebeActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cadastro_bebe);
 
-        // Ajuste de margens do sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // 1. Inicializações
-        db = FirebaseFirestore.getInstance();
         tvTitulo= findViewById(R.id.tv_titulo_cadastro);
         editNomeBebe = findViewById(R.id.nome_bebe);
         editDataNasc = findViewById(R.id.data_nasc);
         spinnerGenero = findViewById(R.id.spinner_genero);
         btnCadastrar = findViewById(R.id.cadastro_bebe_button);
 
+        repository = new BebeRepository();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -65,22 +67,17 @@ public class CadastroBebeActivity extends AppCompatActivity {
             finish();
         }
 
-        // 2. Configurar Spinner
+        //configurar Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, opcoesGenero);
         spinnerGenero.setAdapter(adapter);
 
         configurarCalendario();
 
-        // 3. Verificar se é Edição ou Novo Cadastro
+        //verificar se é Edição ou Novo Cadastro
         bebeIdParaEdicao = getIntent().getStringExtra("BEBE_ID");
 
         if (bebeIdParaEdicao != null) {
-            // Segurança para não travar se o tema não tiver
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle("Editar Perfil");
-            }
             tvTitulo.setText("Editar dados do bebê");
-
             btnCadastrar.setText("Atualizar Dados");
             carregarDadosDoBebe();
         }
@@ -110,70 +107,69 @@ public class CadastroBebeActivity extends AppCompatActivity {
         String data = editDataNasc.getText().toString().trim();
         String genero = spinnerGenero.getSelectedItem().toString();
 
-        if (nome.isEmpty()) { editNomeBebe.setError("Digite o nome"); return; }
-        if (data.isEmpty()) { Toast.makeText(this, "Selecione uma data", Toast.LENGTH_SHORT).show(); return; }
-        if (genero.equals("Selecione um gênero")) { Toast.makeText(this, "Selecione o gênero", Toast.LENGTH_SHORT).show(); return; }
-
-        salvarNoFirestore(nome, data, genero);
-    }
-
-    private void salvarNoFirestore(String nome, String data, String genero) {
-        //não salvar sem o userId
-        if (userId == null) {
-            Toast.makeText(this, "Erro: usuário não identificado", Toast.LENGTH_SHORT).show();
+        if (nome.isEmpty()) { editNomeBebe.setError("Digite o nome do bebê"); return; }
+        if (data.isEmpty() || genero.equals("Selecione um gênero")) {
+            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Map<String, Object> bebe = new HashMap<>();
-        bebe.put("nome", nome);
-        bebe.put("dataNascimento", data);
-        bebe.put("genero", genero);
-        bebe.put("paiId", userId);
-        bebe.put("dataCadastro", Timestamp.now());
 
-        if (bebeIdParaEdicao != null) {
+        BebeModel bebe = new BebeModel();
+        bebe.setId(bebeIdParaEdicao);
+        bebe.setNome(nome);
+        bebe.setGenero(genero);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            Date date = sdf.parse(data);
 
-            db.collection("bebes")
-                    .document(bebeIdParaEdicao)
-                    .update(bebe)
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, "Dados atualizados!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(this, "Erro ao atualizar", Toast.LENGTH_SHORT).show());
+            Timestamp timestamp = new Timestamp(date);
+            bebe.setDataNascimento(timestamp);
 
-        } else {
-
-            db.collection("bebes")
-                    .add(bebe)
-                    .addOnSuccessListener(doc -> {
-                        Toast.makeText(this, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(this, "Erro ao salvar", Toast.LENGTH_SHORT).show());
+        } catch (Exception e) {
+            editDataNasc.setError("Data inválida");
+            return;
         }
+
+
+        repository.salvarOuAtualizar(bebe)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Sucesso!", Toast.LENGTH_SHORT).show();
+
+                    if (bebeIdParaEdicao != null) {
+                        finish();
+                    } else {
+                        Intent intent = new Intent(CadastroBebeActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
     }
 
     private void carregarDadosDoBebe() {
-        db.collection("bebes").document(bebeIdParaEdicao).get()
+        repository.buscarPorId(bebeIdParaEdicao)
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        editNomeBebe.setText(documentSnapshot.getString("nome"));
-                        editDataNasc.setText(documentSnapshot.getString("dataNascimento"));
+                        BebeModel bebe = documentSnapshot.toObject(BebeModel.class);
+                        if (bebe != null) {
+                            editNomeBebe.setText(bebe.getNome());
+                            selecionarGeneroNoSpinner(bebe.getGenero());
 
-                        // Lógica para selecionar o gênero no Spinner automaticamente
-                        String generoSalvo = documentSnapshot.getString("genero");
-                        if (generoSalvo != null) {
-                            for (int i = 0; i < opcoesGenero.length; i++) {
-                                if (opcoesGenero[i].equals(generoSalvo)) {
-                                    spinnerGenero.setSelection(i);
-                                    break;
-                                }
-                            }
+                            editDataNasc.setText(bebe.getDataNascimentoFormatada());
                         }
                     }
                 });
+    }
+
+    private void selecionarGeneroNoSpinner(String genero) {
+        for (int i = 0; i < opcoesGenero.length; i++) {
+            if (opcoesGenero[i].equals(genero)) {
+                spinnerGenero.setSelection(i);
+                break;
+            }
+        }
     }
 }

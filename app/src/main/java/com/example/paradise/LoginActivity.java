@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void verificarCadastroBebe(String userId) {
         db.collection("bebes")
-                .whereEqualTo("paiId", userId) //para o SQL
+                .whereEqualTo("paiId", userId)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

@@ -30,6 +30,10 @@ public class BebeAdapter extends RecyclerView.Adapter<BebeAdapter.BebeViewHolder
         this.context = context;
         this.listener = listener;
     }
+    public void atualizarLista(List<BebeModel> novaLista) {
+        this.lista = novaLista;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -43,7 +47,7 @@ public class BebeAdapter extends RecyclerView.Adapter<BebeAdapter.BebeViewHolder
         BebeModel bebe = lista.get(position);
 
         holder.nome.setText(bebe.getNome());
-        holder.data_nasc.setText("Nascimento: " + bebe.getDataNascimento());
+        holder.data_nasc.setText("Nascimento: " + bebe.getDataNascimentoFormatada());
 
         // Ações de excluir e editar
         holder.btnExcluir.setOnClickListener(v -> listener.onAction(bebe, "EXCLUIR"));
